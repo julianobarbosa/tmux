@@ -8,6 +8,8 @@ Check for dependency
 http://libevent.org
 
 ```console
+cd tmux
+sh autogen.sh
 ./configure && make
 sudo make install
 ```
