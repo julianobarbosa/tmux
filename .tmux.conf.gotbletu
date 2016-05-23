@@ -8,7 +8,6 @@
 #       https://twitter.com/gotbletu
 #       https://plus.google.com/+gotbletu
 #       https://github.com/gotbletu
-#	https://github.com/gotbletu/dotfiles/blob/master/tmux/.tmux.conf
 #       gotbleu@gmail.com
  
 #-------- Common Settings {{{
@@ -68,7 +67,7 @@ set-option -g default-terminal "screen-256color"
 set-option -g status-keys vi
 
 # unicode
-set-window-option -g utf8 on
+# set-window-option -g utf8 on
 
 # select panes
 bind-key k select-pane -U
@@ -77,10 +76,10 @@ bind-key j select-pane -D
 bind-key l select-pane -R
 
 # cycle windows/panes (no prefix)
-bind-key -n M-k select-pane -t :.-	# prev pane
-bind-key -n M-j select-pane -t :.+	# next pane
-bind-key -n M-h select-window -t :-	# previous window
-bind-key -n M-l select-window -t :+	# next window
+bind-key -n M-k select-pane -t :.-  # prev pane
+bind-key -n M-j select-pane -t :.+  # next pane
+bind-key -n M-h select-window -t :- # previous window
+bind-key -n M-l select-window -t :+ # next window
 
 # resize panes
 bind-key -r J resize-pane -D 1 
@@ -89,8 +88,8 @@ bind-key -r H resize-pane -L 1
 bind-key -r L resize-pane -R 1 
 
 # better pane split bindings with current path (tmux 1.9+)
-bind-key \ split-window -h -c "#{pane_current_path}"	# vertical split
-bind-key - split-window -v -c "#{pane_current_path}"	# horizontal split
+bind-key \ split-window -h -c "#{pane_current_path}"    # vertical split
+bind-key - split-window -v -c "#{pane_current_path}"    # horizontal split
 
 # new window/pane with the current path (tmux 1.9+)
 bind-key c new-window -c "#{pane_current_path}"
@@ -115,14 +114,14 @@ set-window-option -g mode-keys vi
 # copying selection vim style
 # http://jasonwryan.com/blog/2011/06/07/copy-and-paste-in-tmux/
 # https://github.com/myfreeweb/dotfiles/blob/master/tmux.conf
-bind-key Escape copy-mode			# enter copy mode; default [
-bind-key -t vi-copy Escape cancel		# exit copy mode; or hit q
-bind-key -t vi-copy v begin-selection		# begin visual mode
-bind-key -t vi-copy V select-line		# visual line
-bind-key -t vi-copy y copy-selection		# yank
-bind-key -t vi-copy r rectangle-toggle 		# visual block toggle
-bind-key p paste-buffer				# paste; default ]
-bind-key P choose-buffer 			# choose which buffer to paste from
+bind-key Escape copy-mode           # enter copy mode; default [
+bind-key -t vi-copy Escape cancel       # exit copy mode; or hit q
+bind-key -t vi-copy v begin-selection       # begin visual mode
+bind-key -t vi-copy V select-line       # visual line
+bind-key -t vi-copy y copy-selection        # yank
+bind-key -t vi-copy r rectangle-toggle      # visual block toggle
+bind-key p paste-buffer             # paste; default ]
+bind-key P choose-buffer            # choose which buffer to paste from
 
 # read and write and delete paste buffer ( xsel method)
 # https://wiki.archlinux.org/index.php/Tmux#ICCCM_Selection_Integration
@@ -160,12 +159,12 @@ bind-key > command-prompt -p "copy to xsel (hit enter to confirm):" "run-shell '
 # (tmux 2.1 or higher) toggle mouse mode
 # https://www.reddit.com/r/tmux/comments/3paqoi/tmux_21_has_been_released/cw552qd
 bind-key m \
-	set-option -g -q mouse on \;\
-	display-message 'Mouse: ON'
+    set-option -g -q mouse on \;\
+    display-message 'Mouse: ON'
 
 bind-key M \
-	set-option -g -q mouse off \;\
-	display-message 'Mouse: OFF'
+    set-option -g -q mouse off \;\
+    display-message 'Mouse: OFF'
 
 # enable PageUp/Down as copy mode
 # in ncurses app (vim,nano ..etc) then functions as normal
@@ -220,7 +219,7 @@ set-option -g renumber-windows on
 #-------- Statusbar {{{
 #------------------------------------------------------
 # UTF-8 character support in the status bar
-set-option -g status-utf8 on
+# set-option -g status-utf8 on
 
 # refresh the status bar every 1 second.
 set-option -g status-interval 1000
@@ -250,8 +249,8 @@ set-window-option -g window-status-bg default
 set-window-option -g window-status-attr dim
 
 # window title colors; active
-set-window-option -g window-status-current-fg white	#font
-set-window-option -g window-status-current-bg red	#boarder
+set-window-option -g window-status-current-fg white #font
+set-window-option -g window-status-current-bg red   #boarder
 set-window-option -g window-status-current-attr bright
 
 
@@ -262,7 +261,7 @@ set-window-option -g window-status-current-attr bright
 # in the status bar.
 set-option -g status-justify centre
 set-option -g status-left-length 40
-set-option -g status-left "#[fg=green]Session: #S #[fg=yellow]#I #[fg=cyan]#P"
+set-option -g status-left "#[fg=red]#H #[fg=yellow]| #[fg=green]Session: #S #[fg=yellow]#I #[fg=cyan]#P"
 
 #}}}
 # RIGHT SIDE {{{
@@ -292,91 +291,94 @@ set-option -g status-right "#[fg=blue]#(~/battery Discharging) | #[fg=cyan]%a %D
 
 #junk template
 bind-key M-j new-window -n work -c $HOME \; \
-	split-window -v -p 50 -t 1  \; \
-	split-window -h -p 50 -t 1  \; \
-	split-window -h -p 50 -t 2  \; \
-	select-pane -t 2
+    split-window -v -p 50 -t 1  \; \
+    split-window -h -p 50 -t 1  \; \
+    split-window -h -p 50 -t 2  \; \
+    select-pane -t 2
 
 # email
 bind-key M-e new-window -n email -c $HOME \; \
-	send-keys 'mutt' 'Enter' \; \
-	split-window -v -p 40 -t 1  \; \
-	send-keys 'tudu' 'Enter' \; \
-	select-pane -t 1
+    send-keys 'mutt' 'Enter' \; \
+    split-window -v -p 40 -t 1  \; \
+    send-keys 'tudu' 'Enter' \; \
+    select-pane -t 1
 
 # file manager
 bind-key M-f new-window -n fm -c $HOME \; \
-	send-keys 'watch "tsp|tac"' 'Enter' \; \
-	split-window -v -p 50 -t 1  \; \
-	send-keys 'ranger' 'Enter' \; \
-	select-pane -t 2
+    send-keys 'watch "tsp|tac"' 'Enter' \; \
+    split-window -v -p 50 -t 1  \; \
+    send-keys 'ranger' 'Enter' \; \
+    select-pane -t 2
 
 # torrent
 bind-key M-t new-window -n torr -c $HOME \; \
-	send-keys 'tsm-ncurse' 'Enter' \; \
-	split-window -h -p 50 -t 1  \; \
-	send-keys 'clear && flexget-list' 'Enter' \; \
-	split-window -v -p 50 -t 1  \; \
-	send-keys 'mpsyt user UCi8e0iOVk1fEOogdfu4YgfA' 'Enter' \; \
-	# send-keys 'clear && figlet -c Movie Trailers && youtube-viewer -C -f -4 --results=6 -u UCi8e0iOVk1fEOogdfu4YgfA' 'Enter' \; \
-	select-pane -t 2
+    send-keys 'tsm-ncurse' 'Enter' \; \
+    split-window -h -p 50 -t 1  \; \
+    send-keys 'clear && flexget-list' 'Enter' \; \
+    split-window -v -p 50 -t 1  \; \
+    send-keys 'mpsyt user UCi8e0iOVk1fEOogdfu4YgfA' 'Enter' \; \
+    # send-keys 'clear && figlet -c Movie Trailers && youtube-viewer -C -f -4 --results=6 -u UCi8e0iOVk1fEOogdfu4YgfA' 'Enter' \; \
+    select-pane -t 2
 
 # chat
 bind-key M-c new-window -n chat -c $HOME \; \
-	send-keys 'weechat-curses' 'Enter' \; \
-	split-window -h -p 30 -t 1  \; \
-	send-keys 'sleep 5 && tmux rename-window chat && finch' 'Enter' \; \
-	select-pane -t 2
+    send-keys 'weechat-curses' 'Enter' \; \
+    split-window -h -p 30 -t 1  \; \
+    send-keys 'sleep 5 && tmux rename-window chat && finch' 'Enter' \; \
+    select-pane -t 2
 
 # music
 bind-key M-m new-window -n music -c $HOME \; \
-	send-keys '~/.cmus/cmus-cover-art/display.sh' 'Enter' \; \
-	split-window -v -p 50 -t 1 \; \
-	send-keys 'cmus' 'Enter' \; \
-	split-window -h -p 75 -t 1 \; \
-	send-keys 'sleep 3 && lyvi' 'Enter' \; \
-	select-pane -t 2
+    send-keys '~/.cmus/cmus-cover-art/display.sh' 'Enter' \; \
+    split-window -v -p 50 -t 1 \; \
+    send-keys 'cmus' 'Enter' \; \
+    split-window -h -p 75 -t 1 \; \
+    send-keys 'sleep 3 && lyvi' 'Enter' \; \
+    select-pane -t 2
 
 # # fap
 # bind-key M-f new-window -n fap -c $HOME \; \
-# 	send-keys 'ranger ~/Storage/.blackbox' 'Enter' \; \
-# 	split-window -v -p 50 -t 1  \; \
-# 	send-keys 'clear && figlet Search Skeet CMX' 'Enter' \; \
-# 	split-window -h -p 50 -t 1  \; \
-# 	send-keys 'reddit_top -s pornvids' 'Enter' \; \
-# 	split-window -h -p 50 -t 2  \; \
-# 	send-keys 'clear && figlet Discover' 'Enter' \; \
-# 	select-pane -t 2
+#   send-keys 'ranger ~/Storage/.blackbox' 'Enter' \; \
+#   split-window -v -p 50 -t 1  \; \
+#   send-keys 'clear && figlet Search Skeet CMX' 'Enter' \; \
+#   split-window -h -p 50 -t 1  \; \
+#   send-keys 'reddit_top -s pornvids' 'Enter' \; \
+#   split-window -h -p 50 -t 2  \; \
+#   send-keys 'clear && figlet Discover' 'Enter' \; \
+#   select-pane -t 2
 
 # stats
 bind-key M-y new-window -n stats -c $HOME \; \
-	send-keys 'htop' 'Enter' \; \
-	split-window -v -p 50 -t 1  \; \
-	send-keys 'clear && figlet Freespace' 'Enter' \; \
-	split-window -h -p 50 -t 1  \; \
-	send-keys 't lsp | less' 'Enter' \; \
-	split-window -h -p 50 -t 2  \; \
-	send-keys 'df' 'Enter' \; \
-	select-pane -t 2
+    send-keys 'htop' 'Enter' \; \
+    split-window -v -p 50 -t 1  \; \
+    send-keys 'clear && figlet Freespace' 'Enter' \; \
+    split-window -h -p 50 -t 1  \; \
+    send-keys 't lsp | less' 'Enter' \; \
+    split-window -h -p 50 -t 2  \; \
+    send-keys 'df' 'Enter' \; \
+    select-pane -t 2
 
 # news
 bind-key M-n new-window -n news -c $HOME \; \
-	send-keys 'newsbeuter' 'Enter' \; \
-	split-window -v -p 50 -t 1  \; \
-	select-pane -t 1
+    send-keys 'newsbeuter' 'Enter' \; \
+    split-window -v -p 50 -t 1  \; \
+    select-pane -t 1
 
 # video
 bind-key M-v new-window -n video -c $HOME \; \
-	send-keys 'ranger ~/Videos' 'Enter' \; \
-	split-window -v -p 50 -t 1  \; \
-	send-keys 'clear && figlet youtube-viewer' 'Enter' \; \
-	split-window -h -p 50 -t 1  \; \
-	send-keys 'clear && figlet rtmpdump' 'Enter' \; \
-	split-window -h -p 50 -t 2  \; \
-	send-keys 'clear && figlet Freespace' 'Enter' \; \
-	select-pane -t 2
+    send-keys 'ranger ~/Videos' 'Enter' \; \
+    split-window -v -p 50 -t 1  \; \
+    send-keys 'clear && figlet youtube-viewer' 'Enter' \; \
+    split-window -h -p 50 -t 1  \; \
+    send-keys 'clear && figlet rtmpdump' 'Enter' \; \
+    split-window -h -p 50 -t 2  \; \
+    send-keys 'clear && figlet Freespace' 'Enter' \; \
+    select-pane -t 2
 
 
+# ssh
+bind e source-file ~/.tmux/jmb
+bind E source-file ~/.tmux/jmb
 
 #}}}
 #-------- URL Launcher {{{
@@ -457,11 +459,28 @@ bind-key '"' new-window -n multisnippet \; send-keys "fzf-multisnippet && tmux k
 # root session auto timeout
 # http://blog.killtheradio.net/technology/tmuxscreen-and-root-shells-a-new-trick-i-just-learned-tmout/
 
+#-------- TPM {{{
+#------------------------------------------------------
+# mouse to highlight and copy; to paste use prefix + ]
+# http://awhan.wordpress.com/2012/04/18/tmux-copy-paste-with-mouse/
+run '~/.tmux/plugins/tpm/tpm'
+
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
+set -g @plugin 'tmux-plugins/tmux-sidebar'
+set -g @plugin 'tmux-plugins/tmux-open'
+set -g @plugin 'tmux-plugins/tmux-battery'
+set -g @plugin 'tmux-plugins/tmux-cpu'
+
+# Run plugins
+run-shell ~/.tmux/plugins/tmux-resurrect/resurrect.tmux
+run-shell ~/.tmux/plugins/tmux-prefix-highlight/prefix_highlight.tmux
+run-shell ~/.tmux/plugins/tmux-sidebar/sidebar.tmux
+run-shell ~/.tmux/plugins/tmux-open/open.tmux
+run-shell ~/.tmux/plugins/tmux-battery/battery.tmux
+run-shell ~/.tmux/plugins/tmux-cpu/cpu.tmux
+
 #}}}
-     
-
-
-
-
-
-
