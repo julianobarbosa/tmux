@@ -2,7 +2,10 @@
 tmux from scratch
 
 Get source code
+```console
+cd /tmp
 git clone https://github.com/tmux/tmux.git
+```
 
 Check for dependency
 http://libevent.org
