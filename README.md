@@ -10,6 +10,11 @@ git clone https://github.com/tmux/tmux.git
 Check for dependency
 http://libevent.org
 
+# CentOS
+```console
+yum install libevent2 libevent2-devel
+```
+
 ```console
 cd tmux
 sh autogen.sh
