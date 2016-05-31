@@ -3,7 +3,7 @@ tmux from scratch
 
 Get source code
 ```console
-cd /tmp
+cd /usr/src
 git clone https://github.com/tmux/tmux.git
 ```
 
