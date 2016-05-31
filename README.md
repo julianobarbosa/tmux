@@ -15,6 +15,7 @@ http://libevent.org
 yum install libevent2 libevent2-devel
 ```
 
+# Compile TMUX source
 ```console
 cd tmux
 sh autogen.sh
