@@ -17,10 +17,18 @@ yum install libevent2 libevent2-devel
 
 # Compile TMUX source
 ```console
-cd tmux
-sh autogen.sh
-./configure && make
-sudo make install
+sudo apt remove -q -y tmux
+sudo apt install -q -y wget tar git libevent-dev libncurses-dev checkinstall
+
+cd /tmp && git clone https://github.com/tmux/tmux.git
+cd tmux/ && sudo sh autogen.sh
+./configure && sudo make
+
+#here in pkgversion you can point the current date for example and latest release version.
+#Flag --install will auto install package to system.
+sudo checkinstall --pkgname tmux --pkgversion latest-master --nodoc --install
+
+tmux -V
 ```
 
 Install Tmux Plugin Manager
