@@ -63,3 +63,6 @@ set -g @plugin 'tmux-plugins/tmux-sidebar'
 set -g @plugin 'tmux-plugins/tmux-open'
 set -g @plugin 'tmux-plugins/tmux-battery'
 set -g @plugin 'tmux-plugins/tmux-cpu'```
+
+
+URL: https://leanpub.com/the-tao-of-tmux/read
